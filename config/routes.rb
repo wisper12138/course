@@ -23,9 +23,11 @@ Rails.application.routes.draw do
       get :quit
       get :open
       get :close
+      get :swap
     end
     collection do
       get :list
+      post :list
     end
   end
 
