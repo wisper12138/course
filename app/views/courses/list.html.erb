@@ -9,6 +9,20 @@
         <div class="panel-heading">
           <h3 class="panel-title">选修课程</h3>
         </div>
+        </br>
+        
+        <div class="row">
+          <%= form_tag list_courses_path , method: :post do %>
+            <div class="form-group">
+              <%= render 'courses/search_course', info: @course_time, submit_name: "course_time", name: "上课时间" %>
+              <%= render 'courses/search_course', info: @course_credit, submit_name: "course_credit", name: "	课时/学分" %>
+              <%= render 'courses/search_course', info: @course_type, submit_name: "course_type", name: "课程属性" %>
+              <button type="submit" class="btn btn-success btn-block"  style="width:80px ; margin-left:88% ">筛选</button>
+            </div>
+          <% end %>
+        </div>
+
+        
         <div class="panel-body" style="min-height: 450px">
           <table class="table table-striped table-hover">
             <thead>
@@ -28,7 +42,7 @@
             </thead>
             <tbody>
 
-            <% @courses.each do |course| %>
+            <% @course.each do |course| %>
                 <tr>
 
                   <td><%= course.course_code %></td>
@@ -46,7 +60,6 @@
             <% end %>
             </tbody>
           </table>
-          <%= will_paginate @courses %>
         </div>
       </div>
     </div>
