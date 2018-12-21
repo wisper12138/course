@@ -4,6 +4,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:peng)
+
   end
 
   test "login with valid information" do
@@ -15,4 +16,5 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", root_path, count: 2
     assert_select "a[href=?]", rails_admin_path, count: 0
   end
+
 end
