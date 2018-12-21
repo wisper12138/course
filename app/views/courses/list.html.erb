@@ -54,7 +54,20 @@
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher.name %></td>
-                  <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+
+                  <% bool_conflict = false %>
+                  
+                  <% @tmp_conflicted_courses.each do |conflicted_course| %>
+                    <% if  conflicted_course.course_code == course.course_code  %>
+                      <td><%= link_to "一键换课", swap_course_path(course), class: 'btn-sm btn-warning tooltip-bottom', title: "课程冲突：该课程与#{conflicted_course.class_room}冲突" %></td>
+                      <% bool_conflict = true %>
+                    <% end %>
+                  <% end %>
+                  
+                  <% if bool_conflict == false %>
+                    <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+                  <% end %>
+
 
                 </tr>
             <% end %>

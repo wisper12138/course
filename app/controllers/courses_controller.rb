@@ -106,6 +106,24 @@ class CoursesController < ApplicationController
     end
     
   end
+  
+  def swap
+    @course = Course.find_by_id(params[:id])
+    @current_user_courses=current_user.courses
+    
+    @current_user_courses.each do |current_user_course|
+      if  current_user_course.course_time == @course.course_time
+        @info = current_user_course.name
+        current_user.courses.delete(current_user_course)
+        break
+      end
+    end    
+      
+    current_user.courses << @course
+    flash = {:success => "成功换课"}
+    redirect_to courses_path, flash: flash
+  end
+
 
   def select
     @course=Course.find_by_id(params[:id])
