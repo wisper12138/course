@@ -59,15 +59,69 @@ class CoursesController < ApplicationController
 
   def list
     #-------QiaoCode--------
-    @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
+    def get_course_info(courses, type)
+      res = Set.new
+      courses.each do |course|
+        res.add(course[type])
+      end
+      res.to_a.sort
+    end
+    
+    def check_course_condition(course, key, value)
+      if value == '' or course[key] == value
+        return true
+      end
+      false
+    end
+
+    tmp_conflicted_courses = []
+    @courses = Course.all
     @course = @courses-current_user.courses
-    tmp=[]
+    @current_user_courses = @courses - @course
+    @course_time = get_course_info(@course, 'course_time')
+    @course_credit = get_course_info(@course, 'credit')
+    @course_type = get_course_info(@course, 'course_type')
+    
     @course.each do |course|
-      if course.open==true
-        tmp<<course
+      @current_user_courses.each do |current_user_courses|
+        if current_user_courses.course_time == course.course_time
+          course.class_room = current_user_courses.name
+          tmp_conflicted_courses << course
+        end
       end
     end
-    @course=tmp
+    
+    @tmp_conflicted_courses = tmp_conflicted_courses
+
+    if request.post?
+      res = []
+      @course.each do |course|
+        if check_course_condition(course, 'course_time', params['course_time']) and
+            check_course_condition(course, 'course_type', params['course_type']) and
+            check_course_condition(course, 'credit', params['course_credit']) and
+          res << course
+        end
+        @course=res
+      end
+    end
+    
+  end
+  
+  def swap
+    @course = Course.find_by_id(params[:id])
+    @current_user_courses=current_user.courses
+    
+    @current_user_courses.each do |current_user_course|
+      if  current_user_course.course_time == @course.course_time
+        @info = current_user_course.name
+        current_user.courses.delete(current_user_course)
+        break
+      end
+    end    
+      
+    current_user.courses << @course
+    flash = {:success => "成功换课"}
+    redirect_to courses_path, flash: flash
   end
 
   def select

@@ -1,75 +1,75 @@
-<div class="container">
+<link href="offcanvas.css" rel="stylesheet">
+    
+  <body>
+    <div class="container">
 
+      <div class="row row-offcanvas row-offcanvas-right">
 
-  <div class="row">
-    <div class="col-md-8" style="background-color: #18BC9C;padding-bottom: 10px;padding-top: 10px">
-      <div style="font-size: 50px; padding-left: 50px">
-        <%= image_tag "profile.png" %>
-        Learning RoR!
-      </div>
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h2>欢迎来到在线选课系统</h2>
+            <p>这个样本系统是基于国科大研究生课程(高级软件工程)开发的项目,目的是帮助入门者学习RoR(Ruby on Rails)。</p>
+            <p>已有功能：</p>
+            <ul>
+              <li class="text-danger">处理选课冲突、控制选课人数</li>
+              <li class="text-danger">统计选课学分,增加选课的开放、关闭功能</li>
+              <li class="text-danger">自定义管理员后台</li>
+              <li class="text-danger">基于OAuth的授权登陆</li>
+              <li class="text-danger">Excel格式的数据导入</li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-lg-4">
+              <h2>英语B免修考试报名通知</h2>
+              <p>2018-2019学年秋季学期末英语B考试定于2019年1月5日（周六）上午进行，相关事宜见详情。</p>
+              <p><a class="btn btn-default" href="#" role="button">详情 &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/.col-xs-6.col-lg-4-->
+          </div><!--/row-->
+        </div><!--/.col-xs-12.col-sm-9-->
 
-    </div>
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a class="list-group-item active">快速通道</a>
+            <a href="http://v.ucas.ac.cn/main/index.do?menuCode=1&r=0.9129389179396971" class="list-group-item">实景课堂</a>
+            <a href="http://payment.ucas.ac.cn/showPublic" class="list-group-item">一卡通支付</a>
+            <a href="http://service.ucas.ac.cn/" class="list-group-item">校园服务</a>
+            <a href="http://sep.ucas.ac.cn/" class="list-group-item">信息门户</a>
+            <a href="http://job.ucas.ac.cn/" class="list-group-item">就业信息</a>
+            <a href="http://www.cas.cn/" class="list-group-item">中国科学院</a>
+            <a href="http://lib.ucas.ac.cn/" class="list-group-item">图书馆</a>
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+      </div><!--/row-->
 
-    <div class="col-md-4">
-      <h1>在线选课系统样本</h1>
-      <p>这个样本系统是基于国科大研究生课程(高级软件工程)开发的项目,目的是帮助入门者学习RoR(Ruby on Rails),这是适合新学者的入手的第一个项目</p>
-      <p>入门者可以在这个样本系统上增加更多的功能:</p>
-      <ul>
+      <hr>
 
-        <li class="text-danger">
-          处理选课冲突、控制选课人数
-        </li>
-        <li class="text-danger">
-          统计选课学分,增加选课的开放、关闭功能
-        </li>
-        <li class="text-danger">
-          自定义管理员后台
-        </li>
-        <li class="text-danger">
-          基于OAuth的授权登陆
-        </li>
-        <li class="text-danger">
-          Excel格式的数据导入
-        </li>
-      </ul>
-
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="alert alert-info text-center">
-        开发此项目,你需要具备以下的知识:
-      </div>
-    </div>
-
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-4">
-      <h2>Bootstrap</h2>
-      <p>Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷. 它由Twitter的设计师Mark
-        Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。</p>
-      <a class="btn btn-info" href="http://www.w3schools.com/bootstrap/">More Info</a>
-    </div>
-
-    <div class="col-md-4">
-      <h2>Javascript/CSS</h2>
-      <p>JavaScript一种直译式脚本语言,广泛用于客户端的脚本语言,是一种动态类型、弱类型、基于原型的语言，内置支持类型，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。CSS
-        (Cascading Style Sheets)是一种用来表现HTML样式的样式语言,能够真正做到网页表现与内容分离。
-      </p>
-      <a class="btn btn-info" href="http://www.runoob.com/js/js-tutorial.html">More Info</a>
-    </div>
-
-    <div class="col-md-4">
-      <h2>Rails Framework</h2>
-      <p>Rails基于MVC（模型- 视图- 控制器）设计模式。从视图中的Ajax应用，到控制器中的访问请求和反馈，到封装数据库的模型，Rails
-        为你提供一个纯Ruby的开发环境,它基于一种计算机软件语言Ruby,给程序开发人员提供了强大的框架支持。Rails结合了PHP体系的优点（快速开发）和Java体系的优点（程序规整）</p>
-      <a class="btn btn-info" href="http://guides.ruby-china.org/">More Info</a>
-    </div>
-  </div>
-</div>
+    </div><!--/.container-->
+  </body>

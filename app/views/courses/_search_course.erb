@@ -1,0 +1,11 @@
+<div class="col-sm-4" style="padding-bottom: 26px;" style="margin-top:0px">
+  <label for="name" class="col-sm-3 control-label"><%= name %></label>
+  <div class="col-sm-9">
+    <select class="form-control" name="<%= submit_name %>">
+      <option value=""></option>
+      <% info.each do |info| %>
+          <option value="<%= info %>"><%= info %></option>
+      <% end %>
+    </select>
+  </div>
+</div>

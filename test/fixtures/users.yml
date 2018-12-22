@@ -5,7 +5,23 @@
 # below each fixture, per the syntax in the comments below
 #
 
+
 peng:
   name: 彭兆卿
   email: admin@test.com
+  password_digest: <%= User.digest('password') %>
+  
+student:
+  name: 闻人恬扬
+  email: student1@test.com
+  department: 自动化研究所
+  password_digest: <%= User.digest('password') %>
+  
+
+
+teacherluo:
+  name: 罗铁坚
+  email: teacher4@test.com
+  teacher: true
+  department: 计算机与控制学院
   password_digest: <%= User.digest('password') %>
