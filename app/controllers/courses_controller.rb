@@ -69,7 +69,11 @@ class CoursesController < ApplicationController
     end
     @course=tmp
   end
+  def totalcredit    #xzh
 
+    @course=current_user.courses
+
+  end 
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course
