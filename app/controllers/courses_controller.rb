@@ -124,7 +124,6 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
-
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course
