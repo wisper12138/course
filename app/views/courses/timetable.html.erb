@@ -1,0 +1,105 @@
+
+<div  class="container-fluid">
+  <div class="row">
+
+    <div class="col-sm-2">
+      <%= render "shared/sidenav" %>
+    </div>
+
+    <div  class="col-sm-10" style="padding-right: 50px">
+
+      <div class="panel panel-primary filterable">
+        <div class="panel-heading">
+          <% if student_logged_in? %>
+              <h3 class="panel-title">课表<input type="button"  class="btn btn-primary" value="打印" onclick="print()" /></h3>    
+          <% end %>
+          
+        </div>
+        
+        <div  class="panel-body">
+          <!--startprint1-->
+          <table class="table table-responsive table-condensed table-hover">
+            <thead>
+            <tr style="font-size:16px;" >
+              <th></th>
+              <th>周一</th>
+              <th>周二</th>
+              <th>周三</th>
+              <th>周四</th>
+              <th>周五</th>
+              <th>周六</th>
+              <th>周日</th>
+
+            </tr>
+            </thead>
+          
+            <tbody style="font-size:16px;" >
+            <% tmp = 1 %>
+            <% while tmp < 13 do %>
+                <% if tmp == 5 %>
+                <tr>
+                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                <% for i in 1..7 %>
+                <td>~~~~~~~~~~~~</td>
+                <% end %>
+                </tr>
+                <% end %>
+                <% if tmp == 9 %>
+                <tr>
+                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                <% for i in 1..7 %>
+                <td>~~~~~~~~~~~~~</td>
+                <% end %>
+                </tr>
+                <% end %>
+                <tr>
+                   <td><%= tmp %></td>
+                   <% tmp2 = ["周一","周二","周三","周四","周五","周六","周日"]%>
+                   <% tmp3 = 0 %>             
+                   <% while tmp3 < 7 do %>
+                   <% tmp4 = 0 %>
+                       <% @course.each do |course| %>
+                          
+                            <% if course.course_time[0..1] == tmp2[tmp3]%>
+                                <% a = course.course_time[3].to_i %>
+                                <% if course.course_time.size == 7 %> 
+                                  <% b =  course.course_time[5].to_i  %>
+                                <% else %> 
+                                  <% b =  course.course_time[5..6].to_i %>
+                                <% end %>
+                                <% for i in a..b %>
+                                  <% if i == tmp %>
+                                    <td><%= link_to course.name, coursedetails_course_path(course) %></td> 
+                                    <% tmp4 += 1 %>
+                                  <% end %>
+                                <% end %>
+  
+                            <% end %>
+                       <% end %>
+                   <% tmp3 += 1 %>
+                   <% if tmp4 == 0 %>
+                      <td></td>
+                   <% end %>
+                   <% end %>
+                </tr>
+            <% tmp += 1 %>    
+            <% end %>
+           
+            </tbody>
+          </table>
+           <!--endprint1-->
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type=text/javascript>
+        function print() {
+            window.print();
+        }
+</script>
+
+
+

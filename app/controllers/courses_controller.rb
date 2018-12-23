@@ -34,7 +34,9 @@ class CoursesController < ApplicationController
     end
     redirect_to courses_path, flash: flash
   end
-
+  
+ 
+    
   def open
     @course=Course.find_by_id(params[:id])
     @course.update_attributes(open: true)
@@ -107,6 +109,51 @@ class CoursesController < ApplicationController
     
   end
   
+ def timetable
+  def week_data_to_num(week_data)
+    param = {
+        '周一' => 0,
+        '周二' => 1,
+        '周三' => 2,
+        '周四' => 3,
+        '周五' => 4,
+        '周六' => 5,
+        '周天' => 6,
+    }
+    param[week_data] + 1
+  end
+  #生成11行7列的数据
+  def get_current_curriculum_table(courses,user)
+    # course_time = Array.new(11) { Array.new(7, '') }
+    course_time = Array.new(11) {Array.new(7) {Array.new(3, '')}}
+    courses.each do |cur|
+      real_course_name = cur.name
+      
+      cur_time = String(cur.course_time)
+      end_j = cur_time.index('(')#index第一次出现的字节位置 end_j=2
+      j = week_data_to_num(cur_time[0...end_j])
+      t = cur_time[end_j + 1...cur_time.index(')')].split("-")
+      for i in (t[0].to_i..t[1].to_i).each
+        course_time[(i-1)*7/7][j-1][0] = real_course_name
+        course_time[(i-1)*7/7][j-1][1] = cur.course_week
+        course_time[(i-1)*7/7][j-1][2] = cur.class_room
+      end
+    end
+    course_time
+  end
+  
+  
+    @course=current_user.courses
+    @current_user_course=current_user.courses
+    @user=current_user
+    @course_time_table = get_current_curriculum_table(@course,@user)#当前课表
+ end
+ 
+  def coursedetails
+    @course=Course.find_by_id(params[:id])
+   
+  end
+
   def swap
     @course = Course.find_by_id(params[:id])
     @current_user_courses=current_user.courses
@@ -162,6 +209,8 @@ class CoursesController < ApplicationController
       redirect_to root_url, flash: {danger: '请登陆'}
     end
   end
+
+
 
   # Confirms a  logged-in user.
   def logged_in
