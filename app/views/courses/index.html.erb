@@ -29,9 +29,13 @@
             <tbody>
             <% @course.each do |course| %>
                 <tr>
-
+                
                   <td><%= course.course_code %></td>
-                  <td><%= course.name %></td>
+                  <% if student_logged_in? %>
+                  <td><%= link_to course.name, coursedetails_course_path(course) %></td> 
+                  <% else %>
+                  <td><%= course.name %></td> 
+                  <% end %>
                   <td><%= course.credit %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher&.name %></td>

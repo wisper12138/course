@@ -1,0 +1,70 @@
+ <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <%= render "shared/sidenav" %>
+
+    </div>
+    <div class="col-sm-10" style="padding-right: 50px">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= @course.name %></h3>
+        </div>
+        <div class="panel-body" style="min-height: 450px">
+          <table class="table table-striped table-hover">
+            <thead style="font-size:16px;" >
+            <tr>
+
+            </tr>
+            <tr>
+              <td width="20%">课程编号</td>
+              <td><%= @course.course_code %></td>
+            </tr>
+            <tr>
+              <td>课程名称</td>
+              <td><%= @course.name %></td>  
+            </tr>
+            <tr>
+              <td>课时/学分</td>
+              <td><%= @course.credit %></td>
+            </tr>
+            <tr>
+              <td>课程属性</td>
+              <td><%= @course.course_type %></td>
+            </tr>
+            <tr>  
+              <td>授课方式</td>
+              <td><%= @course.teaching_type %></td>
+            </tr>
+            <tr>
+              <td style="color:#1874CD">上课教室</td>
+              <td style="color:#1874CD"><%= @course.class_room %></td> 
+            </tr>
+            <tr>    
+              <td style="color:#1874CD">上课时间</td>
+              <td style="color:#1874CD"><%= @course.course_time %></td>
+            </tr>
+            <tr>   
+              <td style="color:#1874CD">上课周数</td>
+              <td style="color:#1874CD"><%= @course.course_week %></td>
+            </tr> 
+            <tr>
+              <td>考试方式</td>
+              <td><%= @course.exam_type %></td>
+            </tr>
+            <tr>
+              <td>主讲教师</td>  
+              <% if !@course.teacher.nil?%>
+              <td><%= @course.teacher.name %></td>
+              <% end %>
+            </tr>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
