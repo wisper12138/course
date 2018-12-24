@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       get :open
       get :close
       get :swap
+      get :timetable
+      get :coursedetails
     end
     collection do
       get :list

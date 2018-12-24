@@ -38,13 +38,18 @@
             <li class="list-group-item">
               <%= link_to list_courses_path do %>
                   <span class="glyphicon glyphicon-chevron-right"></span> 选修课程
-                  <span class="label label-info pull-right"><%= Course.all.count %></span>
+                  <span class="label label-info pull-right"><%= Course.all.count-current_user.courses.count %></span>
               <% end %>
             </li>
             <li class="list-group-item">
               <%= link_to courses_path do %>
                   <span class="glyphicon glyphicon-chevron-right"></span> 已选课程
                   <span class="label label-info pull-right"><%= current_user.courses.count %></span>
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to timetable_course_url(current_user.courses) do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 个人课表
               <% end %>
             </li>
         <% end %>
