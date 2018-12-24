@@ -32,15 +32,15 @@ two:
   teacher: teacherluo
 
 three:
-  name: 计算机体系结构
-  course_code: 091M4003H
-  course_type: 专业核心课
-  teaching_type: 课堂讲授为主
-  credit: 40/2.0
+  name: "计算机体系结构"
+  course_code: "091M4003H"
+  course_type: "专业核心课"
+  teaching_type: "课堂讲授为主"
+  credit: "40/2.0"
   limit_num: ""
-  course_week: 第2-20周
-  course_time: 周一(9-11)
-  class_room: 教1-107
-  teaching_type: 课堂讲授为主
-  exam_type: 闭卷笔试
+  course_week: "第2-20周"
+  course_time: "周一(9-11)"
+  class_room: "教1-107"
+  teaching_type: "课堂讲授为主"
+  exam_type: "闭卷笔试"
   teacher: teacherluo

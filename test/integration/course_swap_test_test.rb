@@ -22,7 +22,9 @@ class CourseSwapTestTest < ActionDispatch::IntegrationTest
     assert_redirected_to courses_path
     assert_not flash.empty?
     get list_courses_path
-    print response.body
     assert_select 'td','一键换课'
+    get swap_course_path(@course2)
+    assert_redirected_to courses_path
+    assert_equal '成功换课', flash[:success]
   end
 end
