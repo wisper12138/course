@@ -36,30 +36,7 @@ Rails.application.routes.draw do
   resources :grades, only: [:index, :update]
   resources :users
   
-  #sgg9
-  #nskk2
-  resources :evaluations do
-    member do
-      get :edit
-      post :insert
-      get :result
-      get :openfeedback
-      get :closefeedback
-      patch :itemupdate
-      delete :itemdelete
-    end
-    collection do
-      get :items
-      post :itemadd      
-    end
-  end 
-
-  resources :notices do
-    member do
-      get :check
-    end
-  end
-
+ 
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
