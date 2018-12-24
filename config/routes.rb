@@ -27,11 +27,38 @@ Rails.application.routes.draw do
     collection do
       get :list
       get :totalcredit
+      #课程评估
+      get :evaluation_index
+      get :feedback_index
     end
   end
 
   resources :grades, only: [:index, :update]
   resources :users
+  
+  #sgg9
+  #nskk2
+  resources :evaluations do
+    member do
+      get :edit
+      post :insert
+      get :result
+      get :openfeedback
+      get :closefeedback
+      patch :itemupdate
+      delete :itemdelete
+    end
+    collection do
+      get :items
+      post :itemadd      
+    end
+  end 
+
+  resources :notices do
+    member do
+      get :check
+    end
+  end
 
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'

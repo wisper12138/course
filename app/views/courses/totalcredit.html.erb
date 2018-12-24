@@ -9,7 +9,8 @@
 
       <div class="panel panel-primary filterable">
         <div class="panel-heading">
-          <% if teacher_logged_in? %><h3 class="panel-title">授课列表</h3>
+          <% if teacher_logged_in? %>
+          <h3 class="panel-title">授课列表</h3>
           <% end %>
           <% if student_logged_in? %>
               <h3 class="panel-title">总学分统计</h3>    <!--  xzh -->
@@ -17,7 +18,7 @@
         </div>
 
         <div class="panel-body">
-          <table class="table table-responsive table-condensed table-hover">
+          <table class="table table-responsive table-condensed table-hover table-striped table-bordered">
             <thead>
 
             <tr style="font-size:16px;" >
@@ -100,6 +101,39 @@
                 <td><%= 12 - degreecredit %></td>
             </tr>
 
+            <% tmp = 0 %>  
+            <% tmp1 = "" %>
+            <% publiccredit = 0.0%>
+            <tr> 
+               <td>已选公共选修课</td>
+                <% @course.each do |course| %>
+                  
+                  
+                     
+                         <% tmp += 1 %>
+                         <% publiccredit += course.credit[-3..-1].to_f %>
+                         <% tmp1 = tmp1 + course.name + "、" %>
+                         <% if tmp == 2 %>
+                            <% tmp1 = tmp1[0..-2]%>
+                            <% tmp1 = tmp1 + "等"%>
+                            <td><%= tmp1%></td>
+                         <% end %>
+                     
+                  
+                  
+                <% end %>
+                <% if tmp == 0 %>
+                    <td>无</td>
+                <% end %>
+                <% if tmp == 1 %>
+                    <% tmp1 = tmp1[0..-2]%>
+                    <td><%= tmp1%></td>
+                <% end %>
+                <td>2</td>
+                <td><%= publiccredit %></td>
+                <td><%= 2 - publiccredit %></td>
+            </tr>
+
 
 
 
@@ -124,3 +158,5 @@
     </div>
   </div>
 </div>
+
+

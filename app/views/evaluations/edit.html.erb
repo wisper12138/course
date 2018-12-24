@@ -1,0 +1,116 @@
+<!--sgg9 -->
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-sm-2">
+      <%= render "shared/sidenav" %>
+    </div>
+
+    <div class="col-sm-10" style="padding-right: 50px">
+
+      <div class="panel panel-primary filterable">
+        <div class="panel-heading">
+          <% if student_logged_in? %><h3 class="panel-title">评估课程</h3>
+          <% end %>
+        </div>
+
+        <div class="panel-body">
+ 
+        <%= form_tag(insert_evaluation_url(@course), method: "post") do%>
+          <h4 >评估课程: <div style="color:#1874CD;display:inline"><%= @course.name %></div> 
+               &nbsp &nbsp 主讲教师：<div style="color:#1874CD;display:inline"><%= 
+              
+              if @course.teacher.nil?
+                              
+              else
+                 @course.teacher.name 
+              end
+               %></div></h4>
+
+          <!--#selected before?-->
+          <% 
+            if current_user.nil?
+            else 
+               evaluation1=Evaluation.where(:user_id=>current_user.id,:course_id=>@course.id).first
+            end
+            selecteds=Array.new(@itemscount+1,0)                  
+            if evaluation1.nil? 
+               puts "888"                                           
+            else                                                  
+               selecteds[0]=1
+               for i in 1..@itemscount
+                 evaluation_find=Evaluation.where(:user_id=>current_user.id,:course_id=>@course.id,:evaluationitem_id=>@itemsid[i-1]).first
+                 if evaluation_find.nil?
+                   selecteds[i]=0
+                 else  
+                   selecteds[i]=evaluation_find.score
+                 end
+               end
+       
+            end                                                       
+          %>
+          
+          <table class="table table-responsive table-condensed table-hover">
+            <thead>
+            <tr style="font-size:16px;">
+              <th>序号</th>
+              <th>评估内容</th>
+              <th>评分</th>
+            </tr>
+
+            <tbody style="font-size:16px;">
+
+              <% for k in 1..@itemscount %>
+                 <tr>
+                   <td><%=k%></td>
+                   <td><%=@itemscontent[k-1]%></td>
+                   <td>
+                      <%= name=":score#{k}"
+                          if selecteds[0]==1 && selecteds[k]==1 
+                             radio_button_tag(name, "1",true) 
+                          else 
+                              radio_button_tag(name, "1") 
+                          end 
+                      %>
+                      <%= label_tag(:scorelabel_1, "优") %>          &nbsp&nbsp&nbsp
+
+                      <%= name=":score#{k}"
+                          if selecteds[0]==1 && selecteds[k]==2 
+                             radio_button_tag(name, "2",true) 
+                          else 
+                              radio_button_tag(name, "2") 
+                          end 
+                      %>
+                      <%= label_tag(:scorelabel_2, "良") %>          &nbsp&nbsp&nbsp
+
+                      <%= name=":score#{k}"
+                          if selecteds[0]==1 && selecteds[k]==3 
+                             radio_button_tag(name, "3",true) 
+                          else 
+                             radio_button_tag(name, "3") 
+                          end 
+                      %>
+                      <%= label_tag(:scorelabel_3, "合格") %>         &nbsp&nbsp&nbsp
+
+                      <%= name=":score#{k}"
+                          if selecteds[0]==1 && selecteds[k]==4 
+                             radio_button_tag(name, "4",true) 
+                          else 
+                             radio_button_tag(name, "4") 
+                          end 
+                      %>
+                      <%= label_tag(:scorelabel_4, "差") %>         &nbsp&nbsp&nbsp
+                   </td>
+                 </tr>
+              <%end%>
+
+            </tbody>
+          </table>
+
+           <%= submit_tag("保存",class: 'btn btn-sm btn-primary',:style=>"font-size:15px;") %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
