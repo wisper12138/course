@@ -29,16 +29,31 @@ Rails.application.routes.draw do
     end
     collection do
       get :list
+
+      get :totalcredit
+      #课程评估
+      get :evaluation_index
+      get :feedback_index
+
       post :list
+ master
     end
   end
 
   resources :grades, only: [:index, :update]
   resources :users
 
+  
+ 
+  get 'sessions/login' => 'sessions#new'
+  post 'sessions/login' => 'sessions#create'
+  delete 'sessions/logout' => 'sessions#destroy'
+
+
   get '/sessions/login' => 'sessions#new'
   post '/sessions/login' => 'sessions#create'
   delete '/sessions/logout' => 'sessions#destroy'
+master
 
 
   # Example resource route with options:

@@ -170,7 +170,11 @@ class CoursesController < ApplicationController
     flash = {:success => "成功换课"}
     redirect_to courses_path, flash: flash
   end
+  def totalcredit    #xzh
 
+    @course=current_user.courses
+
+  end 
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course
