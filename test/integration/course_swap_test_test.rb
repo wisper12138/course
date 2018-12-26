@@ -7,12 +7,6 @@ class CourseSwapTestTest < ActionDispatch::IntegrationTest
     @course2 = courses(:two)
   end
   
-  def log_in_as(user, password: 'password', remember_me: '1')
-    post sessions_login_path(params: {session: { email: user.email,
-                                                 password: password,
-                                                 remember_me: remember_me } })
-  end
-
   test "courses conflited and swap" do
     log_in_as(@user)
     assert_redirected_to controller: :homes, action: :index
