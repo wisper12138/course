@@ -1,4 +1,5 @@
 source 'https://gems.ruby-china.com'
+ruby "2.4.4"
 
 gem 'bootstrap-sass', '~> 3.3.7'
 # Use ActiveModel has_secure_password
