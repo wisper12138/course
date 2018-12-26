@@ -36,7 +36,6 @@ Rails.application.routes.draw do
       get :feedback_index
 
       post :list
- master
     end
   end
 
@@ -53,7 +52,6 @@ Rails.application.routes.draw do
   get '/sessions/login' => 'sessions#new'
   post '/sessions/login' => 'sessions#create'
   delete '/sessions/logout' => 'sessions#destroy'
-master
 
 
   # Example resource route with options:

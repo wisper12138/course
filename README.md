@@ -104,6 +104,60 @@ $ rails s
 
 6.运行部署，详情[请戳这里](https://devcenter.heroku.com/articles/getting-started-with-rails4#rails-asset-pipeline)
 
+## 操作指南
+
+### 课程筛选指南：
+
+  学生登陆后可在选课系统内进行选课，通过筛选课程可对课程进行快速筛选，学生可直接对上课时间、学时/学分、课程类型进行筛选，然后点击筛选
+  按钮便可查看相应的课程。
+  
+### 截图
+
+<img src="lib/课程筛选1.0.png" width="700">  
+
+<img src="lib/课程筛选2.0.png" width="700">
+
+<img src="lib/课程筛选3.0.png" width="700">
+
+### 测试用例代码
+```
+  test "courses filter1" do
+    log_in_as(@user)
+    assert_redirected_to controller: :homes, action: :index
+    follow_redirect!
+    assert_template 'homes/index'
+    get list_courses_path
+    post list_courses_path, parmas: {'course_time'=>'周五(2-4)', 'course_credit'=>'', 'course_type'=>''}
+    assert_response :success 
+  end
+```
+
+### 选课冲突指南
+
+  学时登陆后在选课界面可以直接看到有冲突的课程，存在冲突的课程不能选择，我们在这里提供了一键换课的功能。通过点击一键换课按钮，能够自动将
+  该课程与冲突了的课程进行替换，同时一键换课按钮还提示了与之冲突的课程的详细信息。
+  
+### 截图
+
+<img src="lib/课程冲突2.0.png" with="700">
+
+### 课程冲突测试用例
+```
+  test "courses conflited and swap" do
+    log_in_as(@user)
+    assert_redirected_to controller: :homes, action: :index
+    follow_redirect!
+    assert_template 'homes/index'
+    get select_course_path(@course1)
+    assert_redirected_to courses_path
+    assert_not flash.empty?
+    get list_courses_path
+    assert_select 'td','一键换课'
+    get swap_course_path(@course2)
+    assert_redirected_to courses_path
+    assert_equal '成功换课', flash[:success]
+  end
+```
 
 ## 本地测试
 

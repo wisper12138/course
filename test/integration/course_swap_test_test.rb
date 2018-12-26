@@ -7,12 +7,6 @@ class CourseSwapTestTest < ActionDispatch::IntegrationTest
     @course2 = courses(:two)
   end
   
-  def log_in_as(user, password: 'password', remember_me: '1')
-    post sessions_login_path(params: {session: { email: user.email,
-                                                 password: password,
-                                                 remember_me: remember_me } })
-  end
-
   test "courses conflited and swap" do
     log_in_as(@user)
     assert_redirected_to controller: :homes, action: :index
@@ -22,7 +16,9 @@ class CourseSwapTestTest < ActionDispatch::IntegrationTest
     assert_redirected_to courses_path
     assert_not flash.empty?
     get list_courses_path
-    print response.body
     assert_select 'td','一键换课'
+    get swap_course_path(@course2)
+    assert_redirected_to courses_path
+    assert_equal '成功换课', flash[:success]
   end
 end
