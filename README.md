@@ -156,22 +156,24 @@ $ rails s
 本项目包含了部分的测试（integration/fixture/model test），测试文件位于/test目录下。一键运行所有测试使用`rake test`：
 
 ```
-PENG-MacBook-Pro:IMS_sample PENG-mac$ rake test
-Run options: --seed 15794
+wangjun18:~/workspace (master) $ rake test
+Run options: --seed 59719
 
 # Running:
-.........
 
-Finished in 1.202169s, 7.4865 runs/s, 16.6366 assertions/s.
+..............
 
-9 runs, 20 assertions, 0 failures, 0 errors, 0 skips
+Finished in 2.038720s, 6.8671 runs/s, 22.5632 assertions/s.
+
+14 runs, 46 assertions, 0 failures, 0 errors, 0 skips
+Coverage report generated for MiniTest to /home/ubuntu/workspace/coverage. 174 / 351 LOC (49.57%) covered.
 ```
 
 ### 测试涵盖率检测
 
 我们使用[simplecov](https://github.com/colszowka/simplecov/)库来检测我们编写的测试对于我们的项目是否完整，截图如下
 
-<img src="lib/覆盖率测试.PNG" with=700>
+<img src="lib/覆盖率测试2.PNG" with=700>
 
 ## How to Contribute
 
