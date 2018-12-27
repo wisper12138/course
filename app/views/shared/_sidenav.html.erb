@@ -105,5 +105,93 @@
     </div>
   </div>
   
+
+  
+  <% if student_logged_in? %>
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <% if student_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationCollapse"><span class="glyphicon glyphicon-list-alt"></span>
+              课程评估</a>
+        <% end %>
+      </h4>
+    </div>
+    
+    <div id="EvaluationCollapse" class="panel-collapse collapse <%= "in" if request.url.include?"courses/evaluation_index" or 
+    (request.url.include?"edit" and request.url.include?"evaluations") %>">
+
+      <ul class="list-group">
+        <% if student_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to evaluation_index_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 当前学期课程评估
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div> 
+  <% end %>
+  <!--sgg2 end-->
+
+  <!--sgg16-->
+  <% if admin_logged_in? %>
+  <div class="panel panel-default"> 
+    <div class="panel-heading">
+      <h4 class="panel-title"> 
+        <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationResultsCollapse"><span class="glyphicon glyphicon-list-alt"></span>
+        评估管理</a>
+      </h4>
+    </div>
+
+    <div id="EvaluationResultsCollapse" class="panel-collapse collapse <%= "in" if request.url.include?"evaluations" %>">
+
+      <ul class="list-group">
+          <li class="list-group-item">
+              <%= link_to evaluations_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 评估结果
+              <% end %>
+          </li>
+          <li class="list-group-item">
+              <%= link_to  items_evaluations_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 修改评估项
+              <% end %>
+          </li>
+      </ul>
+    </div>
+
+  </div>
+  <% end %>
+  <!--sgg16 end-->
+
+  <!--sgg21 -->
+  <% if teacher_logged_in? %>
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <% if teacher_logged_in? %>
+            <a data-toggle="collapse" data-parent="#accordion" href="#EvaluationTeacherCollapse"><span class="glyphicon glyphicon-list-alt"></span>
+              评估反馈</a>
+        <% end %>
+      </h4>
+    </div>
+    
+    <div id="EvaluationTeacherCollapse" class="panel-collapse collapse <%= "in" if request.url.include?"feedback" or request.url.include?"result" %>">
+
+      <ul class="list-group">
+        <% if teacher_logged_in? %>
+            <li class="list-group-item">
+              <%= link_to feedback_index_courses_path do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span> 课程评估反馈
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div> 
+  <% end %>
   
 </div>

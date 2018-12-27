@@ -36,25 +36,33 @@ Rails.application.routes.draw do
       get :feedback_index
 
       post :list
- master
+
     end
   end
 
   resources :grades, only: [:index, :update]
   resources :users
 
-  
+  resources :evaluations do
+    member do
+      get :edit
+      post :insert
+      get :result
+      get :openfeedback
+      get :closefeedback
+      patch :itemupdate
+      delete :itemdelete
+    end
+    collection do
+      get :items
+      post :itemadd      
+    end
+  end 
+
  
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
-
-
-  get '/sessions/login' => 'sessions#new'
-  post '/sessions/login' => 'sessions#create'
-  delete '/sessions/logout' => 'sessions#destroy'
-master
-
 
   # Example resource route with options:
   #   resources :products do

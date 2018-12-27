@@ -71,11 +71,9 @@
             <% tmp1 = "" %>
             <% degreecredit = 0.0%>
             <tr> 
-               <td>已选学位课</td>
+               <td>已选核心课</td>
                 <% @course.each do |course| %>
-                  
-                  
-                     
+                      <% if course.course_type == "一级学科核心课"||course.course_type=="专业核心课" %>
                          <% tmp += 1 %>
                          <% degreecredit += course.credit[-3..-1].to_f %>
                          <% tmp1 = tmp1 + course.name + "、" %>
@@ -84,9 +82,7 @@
                             <% tmp1 = tmp1 + "等"%>
                             <td><%= tmp1%></td>
                          <% end %>
-                     
-                  
-                  
+                      <% end %>
                 <% end %>
                 <% if tmp == 0 %>
                     <td>无</td>
@@ -95,10 +91,70 @@
                     <% tmp1 = tmp1[0..-2]%>
                     <td><%= tmp1%></td>
                 <% end %>
-                <td>12</td>
+                <td>9</td>
                 <td><%= degreecredit %></td>
-                <td><%= 12 - degreecredit %></td>
+                <td><%= 9 - degreecredit %></td>
             </tr>
+            
+            <% tmp = 0 %>  
+            <% tmp1 = "" %>
+            <% degreecredit = 0.0%>
+            <tr> 
+               <td>已选普及课</td>
+                <% @course.each do |course| %>
+                      <% if course.course_type == "专业普及课" %>
+                         <% tmp += 1 %>
+                         <% degreecredit += course.credit[-3..-1].to_f %>
+                         <% tmp1 = tmp1 + course.name + "、" %>
+                         <% if tmp == 2 %>
+                            <% tmp1 = tmp1[0..-2]%>
+                            <% tmp1 = tmp1 + "等"%>
+                            <td><%= tmp1%></td>
+                         <% end %>
+                      <% end %>
+                <% end %>
+                <% if tmp == 0 %>
+                    <td>无</td>
+                <% end %>
+                <% if tmp == 1 %>
+                    <% tmp1 = tmp1[0..-2]%>
+                    <td><%= tmp1%></td>
+                <% end %>
+                <td>9</td>
+                <td><%= degreecredit %></td>
+                <td><%= 9 - degreecredit %></td>
+            </tr>
+
+
+            <% tmp = 0 %>  
+            <% tmp1 = "" %>
+            <% degreecredit = 0.0%>
+            <tr> 
+               <td>已选研讨课</td>
+                <% @course.each do |course| %>
+                      <% if course.course_type == "专业研讨课" %>
+                         <% tmp += 1 %>
+                         <% degreecredit += course.credit[-3..-1].to_f %>
+                         <% tmp1 = tmp1 + course.name + "、" %>
+                         <% if tmp == 2 %>
+                            <% tmp1 = tmp1[0..-2]%>
+                            <% tmp1 = tmp1 + "等"%>
+                            <td><%= tmp1%></td>
+                         <% end %>
+                      <% end %>
+                <% end %>
+                <% if tmp == 0 %>
+                    <td>无</td>
+                <% end %>
+                <% if tmp == 1 %>
+                    <% tmp1 = tmp1[0..-2]%>
+                    <td><%= tmp1%></td>
+                <% end %>
+                <td>9</td>
+                <td><%= degreecredit %></td>
+                <td><%= 9 - degreecredit %></td>
+            </tr>
+
 
             <% tmp = 0 %>  
             <% tmp1 = "" %>
@@ -106,9 +162,7 @@
             <tr> 
                <td>已选公共选修课</td>
                 <% @course.each do |course| %>
-                  
-                  
-                     
+                  <% if course.course_type == "公共选修课" %>
                          <% tmp += 1 %>
                          <% publiccredit += course.credit[-3..-1].to_f %>
                          <% tmp1 = tmp1 + course.name + "、" %>
@@ -117,8 +171,7 @@
                             <% tmp1 = tmp1 + "等"%>
                             <td><%= tmp1%></td>
                          <% end %>
-                     
-                  
+                  <% end %>
                   
                 <% end %>
                 <% if tmp == 0 %>
