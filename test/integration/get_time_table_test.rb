@@ -12,10 +12,7 @@ class GetTimeTableTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'homes/index'
     get select_course_path(@course1)
-    get timetable_course_url
-    assert_select "td", @course1.name
-    get coursedetails_course_path(@course1)
-    assert_response :success
-    assert_select "h3", @course1.name
+    get timetable_courses_path
+    assert_select "td", "高级软件工程[第2-20周][教1-107]"
   end
 end
