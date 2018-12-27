@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="col-sm-10  col-md-offset-1">
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+
+          <h3 class="panel-title">课程详细信息：<strong><%= @course.name%></strong></h3>
+          <div style="float:right; margin-top: -26px">
+            <button class="btn btn-info" onclick="window.close();">关闭</button>
+          </div>
+
+        </div>
+        <div class="panel-body" style="min-height: 450px">
+          <div style="display: block;">
+            <h4><p><strong><%= @course.name%></strong></p></h4>
+            <p>
+              <span><strong>课程编码：</strong><%= @course.course_code%></span>
+              <span style="margin-left: 20px"><strong>课时：</strong><%= @course.course_time%></span>
+              <span style="margin-left: 20px"><strong>学分：</strong><%= @course.credit%></span>
+              <span style="margin-left: 20px"><strong>课程属性：</strong><%= @course.course_type%></span>
+              <span style="margin-left: 20px"><strong>主讲教师：</strong><%= @course.teacher.name%></span>
+            </p>
+            <hr>
+            <div><strong>教学目的要求</strong></div>
+            <div><strong>预修课程</strong></div>
+            <div><strong>教材</strong></div>
+            <div><strong>主要内容</strong></div>
+            <div><strong>参考文献</strong></div>
+            <div><strong>课程教师信息</strong></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

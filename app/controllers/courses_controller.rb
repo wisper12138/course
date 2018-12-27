@@ -102,14 +102,33 @@ class CoursesController < ApplicationController
             check_course_condition(course, 'course_type', params['course_type']) and
             check_course_condition(course, 'credit', params['course_credit']) and
           res << course
+             
         end
         @course=res
+     
       end
     end
-    
+    @course_time_table = get_course_table(@current_user_courses)
   end
   
- def timetable
+   def timetable#course table
+    @courses=current_user.courses if student_logged_in?
+    
+    @courseT=Array.new(77,'')
+    @courses.each do |i|
+      @courseI=CourseInfo.find_by_course_code(i.id)
+      j=@courseI
+      if j.course_class.to_i>9
+        a=Array(j.course_class.to_i-1..j.course_class[3,2].to_i-1)
+      else
+        a=Array(j.course_class.to_i-1..j.course_class[2,2].to_i-1)
+      end
+      a.each do |s|
+        @courseT[s*7+(j.course_day.to_i-1)]=i.name+"["+i.course_week+"]"+"["+i.class_room+"]"
+      end
+    end
+   end
+  
   def week_data_to_num(week_data)
     param = {
         '周一' => 0,
@@ -122,31 +141,42 @@ class CoursesController < ApplicationController
     }
     param[week_data] + 1
   end
-  #生成11行7列的数据
-  def get_current_curriculum_table(courses,user)
-    # course_time = Array.new(11) { Array.new(7, '') }
-    course_time = Array.new(11) {Array.new(7) {Array.new(3, '')}}
-    courses.each do |cur|
-      real_course_name = cur.name
-      
-      cur_time = String(cur.course_time)
-      end_j = cur_time.index('(')#index第一次出现的字节位置 end_j=2
-      j = week_data_to_num(cur_time[0...end_j])
-      t = cur_time[end_j + 1...cur_time.index(')')].split("-")
-      for i in (t[0].to_i..t[1].to_i).each
-        course_time[(i-1)*7/7][j-1][0] = real_course_name
-        course_time[(i-1)*7/7][j-1][1] = cur.course_week
-        course_time[(i-1)*7/7][j-1][2] = cur.class_room
+
+
+  def get_course_table(courses)
+    course_time = Array.new(11) { Array.new(7, {'name' => '', 'id' => '', 'room' => ''}) }
+    if courses
+      courses.each do |cur|
+        cur_time = String(cur.course_time)
+        end_j = cur_time.index('(')
+        j = week_data_to_num(cur_time[0...end_j])
+        t = cur_time[end_j + 1...cur_time.index(')')].split("-")
+        for i in (t[0].to_i..t[1].to_i).each
+          course_time[(i-1)*7/7][j-1] = {
+              'name' => cur.name,
+              'id' => cur.id,
+              'room' => cur.class_room
+          }
+        end
       end
     end
     course_time
   end
+
+  def get_student_course()
+    course = []
+    current_user.grades.each do |x|
+      course << x.course
+    end
+    course
+  end
+
   
-  
-    @course=current_user.courses
-    @current_user_course=current_user.courses
-    @user=current_user
-    @course_time_table = get_current_curriculum_table(@course,@user)#当前课表
+ def my_course_list
+   
+    @course= get_student_course() if student_logged_in?
+    @course_time_table = get_course_table(@course)
+
  end
  
   def coursedetails
@@ -189,7 +219,9 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
-
+def info
+    @course=Course.find_by_id(params[:id])
+end
   #-------------------------for both teachers and students----------------------
 
   def index

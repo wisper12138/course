@@ -1,105 +1,126 @@
-
-<div  class="container-fluid">
+<div class="container-fluid">
   <div class="row">
-
     <div class="col-sm-2">
       <%= render "shared/sidenav" %>
+
     </div>
-
-    <div  class="col-sm-10" style="padding-right: 50px">
-
-      <div class="panel panel-primary filterable">
+    
+    <div class="col-sm-10">
+      <div class="panel panel-primary">
         <div class="panel-heading">
-          <% if student_logged_in? %>
-              <h3 class="panel-title">课表<input type="button"  class="btn btn-primary" value="打印" onclick="print()" /></h3>    
-          <% end %>
-          
+          <h3 class="panel-title">课程表&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="button"  class="btn btn-primary" value="打印" onclick="doPrint()" /></h3>
         </div>
-        
-        <div  class="panel-body">
-          <!--startprint1-->
-          <table class="table table-responsive table-condensed table-hover">
+        <!--startprint-->
+        <div class="panel-body" style="min-height: 450px">
+          <table class="table table-striped table-hover table-bordered">
             <thead>
-            <tr style="font-size:16px;" >
-              <th></th>
-              <th>周一</th>
-              <th>周二</th>
-              <th>周三</th>
-              <th>周四</th>
-              <th>周五</th>
-              <th>周六</th>
-              <th>周日</th>
-
+            <tr>
+              <th ></th>
+              <th>节次（上课时间）/星期</th>
+              <th>星期一</th>
+              <th>星期二</th>
+              <th>星期三</th>
+              <th>星期四</th>
+              <th>星期五</th>
+              <th>星期六</th>
+              <th>星期日</th>
             </tr>
             </thead>
-          
-            <tbody style="font-size:16px;" >
-            <% tmp = 1 %>
-            <% while tmp < 13 do %>
-                <% if tmp == 5 %>
+            <tbody>
                 <tr>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <% for i in 1..7 %>
-                <td>~~~~~~~~~~~~</td>
-                <% end %>
+                  <th  rowspan="4" rowspan=$rowspan style='vertical-align: middle;text-align: center;'>上午</th>
+                  <th >01（08：30-09：20）</th>
+                  <% @courseT[0,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                    
+                  <% end %>
+        
                 </tr>
-                <% end %>
-                <% if tmp == 9 %>
                 <tr>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <% for i in 1..7 %>
-                <td>~~~~~~~~~~~~~</td>
-                <% end %>
+                  <th>02（09：20-10：10）</th>
+                  <% @courseT[7,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
                 </tr>
-                <% end %>
                 <tr>
-                   <td><%= tmp %></td>
-                   <% tmp2 = ["周一","周二","周三","周四","周五","周六","周日"]%>
-                   <% tmp3 = 0 %>             
-                   <% while tmp3 < 7 do %>
-                   <% tmp4 = 0 %>
-                       <% @course.each do |course| %>
-                          
-                            <% if course.course_time[0..1] == tmp2[tmp3]%>
-                                <% a = course.course_time[3].to_i %>
-                                <% if course.course_time.size == 7 %> 
-                                  <% b =  course.course_time[5].to_i  %>
-                                <% else %> 
-                                  <% b =  course.course_time[5..6].to_i %>
-                                <% end %>
-                                <% for i in a..b %>
-                                  <% if i == tmp %>
-                                    <td><%= link_to course.name, coursedetails_course_path(course) %></td> 
-                                    <% tmp4 += 1 %>
-                                  <% end %>
-                                <% end %>
-  
-                            <% end %>
-                       <% end %>
-                   <% tmp3 += 1 %>
-                   <% if tmp4 == 0 %>
-                      <td></td>
-                   <% end %>
-                   <% end %>
+                  <th>03（10：30-11：20）</th>
+                  <% @courseT[14,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
                 </tr>
-            <% tmp += 1 %>    
-            <% end %>
-           
+                <tr>
+                  <th>04（11：20-12：10）</th>
+                  <% @courseT[21,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th rowspan="4" rowspan=$rowspan style='vertical-align: middle;text-align: center;'>下午</th>
+                  <th>05（13：30-14：20）</th>
+                  <% @courseT[28,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th>06（14：20-15：10）</th>
+                  <% @courseT[35,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th>07（15：30-16：20）</th>
+                  <% @courseT[42,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th>08（16：20-17：10）</th>
+                  <% @courseT[49,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th rowspan="3" rowspan=$rowspan style='vertical-align: middle;text-align: center;'>晚上</th>
+                  <th>09（19：00-19：50）</th>
+                  <% @courseT[56,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th>10（19：50-20：40）</th>
+                  <% @courseT[63,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th>11（20：40-21：50）</th>
+                  <% @courseT[70,7].each do |courseT| %>
+                      <td><%= courseT %></td>
+                  <% end %>
+                </tr>
             </tbody>
           </table>
-           <!--endprint1-->
         </div>
-       
       </div>
+    </div>
+    <div class="col-lg-10 pull-right">
+      
     </div>
   </div>
 </div>
-
-<script type=text/javascript>
-        function print() {
-            window.print();
-        }
+<!--endprint-->
+<script type="text/javascript">
+    function doPrint() {   
+    bdhtml=window.document.body.innerHTML;   
+    sprnstr="<!--startprint-->";   
+    eprnstr="<!--endprint-->";   
+    prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);   
+    prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));   
+    window.document.body.innerHTML=prnhtml;  
+    window.print();   
+}  
 </script>
+
 
 
 
