@@ -124,6 +124,52 @@ course_map={
     34 => {course_code: "09MGX005H", name: "Python语言导论", course_type: "公共选修课", credit: "40/1.0", limit_num: 154, course_week: "第4-14周	", course_time: "周二(7-8)", class_room: "教1-108", teaching_type: "课堂讲授为主", exam_type: "课堂开卷"},
 }
 
+course_info_map={
+    1 => {course_code: 1, course_day: 1, course_class: '9-11'},
+    2 => {course_code: 2, course_day: 5, course_class: '2-4'},
+    3 => {course_code: 3, course_day: 4, course_class: '9-11'},
+    4 => {course_code: 4, course_day: 3, course_class: '9-11'},
+    5 => {course_code: 5, course_day: 2, course_class: '5-7'},
+    6 => {course_code: 6, course_day: 5, course_class: '2-4'},
+    7 => {course_code: 7, course_day: 1, course_class: '5-7'},
+    8 => {course_code: 8, course_day: 2, course_class: '9-11'},
+    9 => {course_code: 9, course_day: 2, course_class: '9-11'},
+    10 => {course_code: 10, course_day: 4, course_class: '5-7'},
+    11 => {course_code: 11, course_day: 1, course_class: '1-2'},
+    12 => {course_code: 12, course_day: 1, course_class: '5-7'},
+    13 => {course_code: 13, course_day: 3, course_class: '7-8'},
+    14 => {course_code: 14, course_day: 4, course_class: '5-7'},
+    15 => {course_code: 15, course_day: 5, course_class: '5-7'},
+    16 => {course_code: 16, course_day: 3, course_class: '5-7'},
+    17 => {course_code: 17, course_day: 2, course_class: '5-7'},
+    18 => {course_code: 18, course_day: 4, course_class: '5-6'},
+    19 => {course_code: 19, course_day: 5, course_class: '5-6'},
+    20 => {course_code: 20, course_day: 2, course_class: '3-4'},
+    21 => {course_code: 21, course_day: 3, course_class: '9-11'},
+    22 => {course_code: 22, course_day: 4, course_class: '9-11'},
+    23 => {course_code: 23, course_day: 2, course_class: '1-2'},
+    24 => {course_code: 24, course_day: 5, course_class: '5-7'},
+    25 => {course_code: 25, course_day: 3, course_class: '1-2'},
+    26 => {course_code: 26, course_day: 3, course_class: '3-4'},
+    27 => {course_code: 27, course_day: 3, course_class: '5-7'},
+    28 => {course_code: 28, course_day: 3, course_class: '5-6'},
+    29 => {course_code: 29, course_day: 4, course_class: '9-10'},
+    30 => {course_code: 30, course_day: 2, course_class: '1-2'},
+    31 => {course_code: 31, course_day: 3, course_class: '1-2'},
+    32 => {course_code: 32, course_day: 2, course_class: '3-4'},
+    33 => {course_code: 33, course_day: 1, course_class: '3-4'},
+    34 => {course_code: 34, course_day: 2, course_class: '7-8'}
+}
+
+course_info_map.keys.each do |index|
+  CourseInfo.create!(
+      course_code: course_info_map[index][:course_code],
+      course_day: course_info_map[index][:course_day],
+      course_class: course_info_map[index][:course_class],
+  )
+
+end
+
 teacher_map.keys.each do |index|
   teacher=User.create!(
       name: teacher_map[index][:name],

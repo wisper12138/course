@@ -24,12 +24,16 @@ Rails.application.routes.draw do
       get :open
       get :close
       get :swap
-      get :timetable
+    
       get :coursedetails
+      get :info
     end
     collection do
       get :list
-
+      get :timetable
+      get :coursedetails
+      get :my_course_list
+      post :my_course_list
       get :totalcredit
       #课程评估
       get :evaluation_index
@@ -41,7 +45,7 @@ Rails.application.routes.draw do
 
   resources :grades, only: [:index, :update]
   resources :users
-
+  resources :activities
   
  
   get 'sessions/login' => 'sessions#new'
