@@ -1,53 +1,152 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- */
+ @import 'bootstrap-sprockets';
+ @import 'bootstrap';
+ @import 'bootstrap/theme';
+ 
+ *,
+ *:after,
+ *::before {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+ }
+ 
+ .table{
+   margin-bottom: 10px;
+ }
+ 
+ .table-striped > tbody > tr:hover >td.has_hover {
+   background-color: #C0C0C0;
+ }
+ 
+ footer {
+   background-color: #555;
+   color: white;
+   padding: 10px;
+ }
+ 
+ .body-background{
+   background-image: image-url('background.jpg');
+   background-color: rgb(255, 254, 254);
+   background-size:100% 100%;
+   -moz-background-size:100% 100%;
+   //background-repeat: no-repeat;
+   //background-size: 100% 100%;
+ }
+ 
+ body{
+   padding-top: 50px;
+   padding-bottom: 100px;
+ }
+ 
+ html {
+   height: 100%;
+ }
+ 
+ section {
+   padding-top: 80px;
+   padding-bottom: 80px;
+   position: relative;
+   overflow: hidden;
+ }
+ 
+ section:nth-of-type(odd) {
+   background: #f4f4f4;
+ }
+ 
+ section h1 {
+   font-family: "Microsoft YaHei UI", sans-serif;
+ }
+ 
+ section h6 {
+   font-size: 16px;
+   font-weight: bold;
+   margin-bottom: 25px;
+   margin-top: 10px;
+   font-style: italic;
+ }
+ 
+ section p.lead {
+   font-size: 16px;
+   line-height: 30px;
+   font-weight: normal;
+   margin-top: 40px;
+ }
+ 
+ .colored-background {
+   background: image_url('/images/index_nav_bg1.png') no-repeat 50% 20%;
+   height: 450px;
+ }
+ 
+ .page-header {
+   margin: 0 !important;
+   margin-top: -19px !important;
+   position: relative;
+   padding: 160px 0 139px 0;
+   border-bottom: none;
+ }
+ 
+ .page-header:before, .page-head-image:before, .carousel .carousel-inner .item:before {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   content: '';
+   opacity: 0.3;
+   z-index: 2;
+   background-color: #dbb5b5b9;
+ }
+ 
+#side_course_table {
+   height: 1000px;
+   overflow: hidden;
+   position: absolute;
+   z-index: 100;
+ }
+ 
+ .side_course_table_ctrlBlock {
+   cursor: pointer;
+   height: 100%;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 80px;
+   z-index: 50;
+ }
+ 
+ .side_course_table_ctrlBlock #course_table_slide_in_button {
+   background: image_url("/images/side_course_table_button.png") repeat scroll left top rgba(0, 0, 0, 0);
+   height: 85px;
+   margin-top: 222px;
+   position: absolute;
+   left: -1px;
+   top: 0;
+   width: 16px;
+ }
+ 
+ .side_course_table_ctrlBlock #course_table_slide_in_button:hover {
+   background: image_url("/images/side_course_table_button_hover.png") repeat scroll left top rgba(0, 0, 0, 0);
+ }
 
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-@import 'bootstrap/theme';
-
-.table{
-  margin-bottom: 10px;
-}
-
-.table-striped > tbody > tr:hover >td.has_hover {
-  background-color: #C0C0C0;
-}
-
-footer {
-  background-color: #555;
-  color: white;
-  padding: 10px;
-}
-
-.body-background{
-  background-image: image-url('background.jpg');
-  //background-color: #DADADA;
-  //background-repeat: no-repeat;
-  //background-size: 100% 100%;
-}
-
-body{
-  padding-top: 50px;
-  padding-bottom: 100px;
-}
-
-html {
-  height: 100%;
-}
-
-
-
-
-
-
+ .colored-background {
+   background: image_url('/images/index_nav_bg1.jpg') no-repeat 50% 20%;
+   height: 450px;
+ }
+ 
+ .page-header {
+   margin: 0 !important;
+   margin-top: -19px !important;
+   position: relative;
+   padding: 160px 0 139px 0;
+   border-bottom: none;
+ }
+ 
+ .page-header:before, .page-head-image:before, .carousel .carousel-inner .item:before {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   content: '';
+   opacity: 0.3;
+   z-index: 2;
+   background-color: #dbb5b5b9;
+ }

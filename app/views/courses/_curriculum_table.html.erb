@@ -1,0 +1,104 @@
+<div id="side_course_table" class="side_course_table col-sm-8">
+  <div class="sideDiv_content">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading">
+        <%= current_user.name %>  课程表
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered" id="course_table" style="text-align: center">
+          <thead>
+          <td></td>
+          <td>星期一</td>
+          <td>星期二</td>
+          <td>星期三</td>
+          <td>星期四</td>
+          <td>星期五</td>
+          <td>星期六</td>
+          <td>星期天</td>
+          </thead>
+          <tbody>
+          <% (0...@course_time_table.length).each do |i| %>
+              <tr>
+                <td><%= i+1 %></td>
+                <% (0...@course_time_table[i].length).each do |j| %>
+                    <td class='row<%= i+1 %> col<%= j+1 %>' alt="<%= @course_time_table[i][j]['id'] %>">
+                      <%= @course_time_table[i][j]['name']+ ' ' + @course_time_table[i][j]['room'] %></td>
+                <% end %>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="side_course_table_ctrlBlock">
+    <div id="course_table_slide_in_button" data-placement="left" class="tooltip-show" data-toggle="tooltip" title="课程表"></div>
+  </div>
+</div>
+
+<script>
+    function hidden_border() {
+        var m = 11, n = 7;
+        for (var j = 1; j <= n; j++) {
+            for (var i = m; i >= 0; i--) {
+                var cur = $('.row' + i + '.col' + j);
+                if (i - 1 >= 0 && cur.attr('alt') != '') {
+                    var pre_row = $('.row' + (i - 1) + '.col' + j);
+                    if (pre_row.attr('alt') == cur.attr('alt')) {
+                        pre_row.css("border-bottom", "none");
+                        cur.css("border-top", "none");
+                        cur.text("");
+                        i--;
+                        if (i - 1 <= m) {
+                            var p_pre_row = $('.row' + (i - 1) + '.col' + j);
+                            if (p_pre_row.attr('alt') == pre_row.attr('alt')) {
+                                i--;
+                                p_pre_row.css("border-bottom", "none");
+                                pre_row.css("border-top", "none");
+                                p_pre_row.text("");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    $(hidden_border());
+    $(document).ready(
+        function () {
+            var sideDiv_right = $("#side_course_table").width()  + (document.body.clientHeight > $(window).height() ? 16 : 25);
+            var speed = 300;
+            $("#side_course_table").css("right", -sideDiv_right);
+            $("#side_course_table").css("top", window.pageYOffset + 100 + 'px');
+            var cnt = 0;
+            $("#course_table_slide_in_button").click(function () {
+                if (!cnt) {
+                    $("#side_course_table")
+                        .animate({
+                                right: '0px'
+                            },
+                            speed,
+                            function () {
+                                document.getElementById("course_table_slide_in_button").style.transform = "rotate(180deg)";
+                                cnt = 1;
+                            });
+                } else {
+                    $("#side_course_table")
+                        .animate({
+                                right: -sideDiv_right +'px'
+                            },
+                            speed,
+                            function () {
+                                document.getElementById("course_table_slide_in_button").style.transform = "rotate(0deg)";
+                                cnt = 0;
+                            });
+                }
+            });
+        }).scroll(function () {
+        $("#side_course_table").css("top", window.pageYOffset + 100 + 'px');
+    });
+    $(function () {
+        $('.tooltip-show').tooltip('show');
+    });
+</script>

@@ -24,46 +24,35 @@ Rails.application.routes.draw do
       get :open
       get :close
       get :swap
-      get :timetable
+    
       get :coursedetails
+      get :info
     end
     collection do
       get :list
-
+      get :timetable
+      get :coursedetails
+      get :my_course_list
+      post :my_course_list
       get :totalcredit
       #课程评估
       get :evaluation_index
       get :feedback_index
 
       post :list
-
     end
   end
 
   resources :grades, only: [:index, :update]
   resources :users
 
-  resources :evaluations do
-    member do
-      get :edit
-      post :insert
-      get :result
-      get :openfeedback
-      get :closefeedback
-      patch :itemupdate
-      delete :itemdelete
-    end
-    collection do
-      get :items
-      post :itemadd      
-    end
-  end 
+  resources :activities
+  
 
  
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
-
   # Example resource route with options:
   #   resources :products do
   #     member do
