@@ -17,7 +17,7 @@ one:
   teaching_type: "课堂讲授为主"
   exam_type: "闭卷笔试"
   teacher: teacherluo
-
+  id: 1
 two:
   course_code: "091M4002H"
   name: "计算机网络"

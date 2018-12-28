@@ -27,6 +27,8 @@
  .body-background{
    background-image: image-url('background.jpg');
    background-color: rgb(255, 254, 254);
+   background-size:100% 100%;
+   -moz-background-size:100% 100%;
    //background-repeat: no-repeat;
    //background-size: 100% 100%;
  }
