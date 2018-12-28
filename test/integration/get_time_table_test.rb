@@ -4,6 +4,7 @@ class GetTimeTableTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:student)
     @course1 = courses(:one)
+    @courseT = course_infos(:infoI)
   end
 
   test "get time table and details" do
