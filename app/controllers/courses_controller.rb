@@ -48,7 +48,11 @@ class CoursesController < ApplicationController
     @course.update_attributes(open: false)
     redirect_to courses_path, flash: {:success => "已经成功关闭该课程:#{ @course.name}"}
   end
-
+  
+  def feedback_index
+    @course=current_user.teaching_courses.paginate(page: params[:page], per_page: 4) if teacher_logged_in?
+  end
+  
   def destroy
     @course=Course.find_by_id(params[:id])
     current_user.teaching_courses.delete(@course)
@@ -56,7 +60,16 @@ class CoursesController < ApplicationController
     flash={:success => "成功删除课程: #{@course.name}"}
     redirect_to courses_path, flash: flash
   end
-
+  
+  def studentlist
+    @course=Course.find_by_id(params[:id])
+    @grade=Grade.where(:course_id => params[:id]).paginate(page: params[:page], per_page: 8) 
+    tmp=[]
+    @grade.each do |grade|
+      tmp<<User.find_by_id(grade.user_id)
+    end
+    @department = tmp
+  end
   #-------------------------for students----------------------
 
   def list
@@ -204,7 +217,9 @@ class CoursesController < ApplicationController
 
     @course=current_user.courses
 
-  end 
+  end
+  
+  
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course
@@ -222,6 +237,7 @@ class CoursesController < ApplicationController
 def info
     @course=Course.find_by_id(params[:id])
 end
+
   #-------------------------for both teachers and students----------------------
 
   def index

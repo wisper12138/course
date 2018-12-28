@@ -33,7 +33,17 @@
                   <td><%= grade.user.major %></td>
                   <td><%= grade.user.department %></td>
                   <td><%= grade.course.name %></td>
-                  <td><%= grade.grade %></td>
+                  <% if student_logged_in? %>
+                  <% if grade.grade != nil %>
+                      <% if grade.grade < 60 %>        
+                          <td style="color:red"><%= grade.grade %></td>
+                      <% else %>
+                          <td><%= grade.grade %></td>
+                      <% end %>
+                  <% else %>
+                      <td>暂未录入</td>
+                  <% end %>
+                  <% end %>
 
                   <% if teacher_logged_in? %>
                       <%= form_for grade, url: grade_url(id: grade.id, course_id: grade.course.id), method: :patch do |f| %>

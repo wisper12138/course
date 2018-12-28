@@ -45,19 +45,14 @@ Rails.application.routes.draw do
 
   resources :grades, only: [:index, :update]
   resources :users
+
   resources :activities
   
+
  
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
-
-
-  get '/sessions/login' => 'sessions#new'
-  post '/sessions/login' => 'sessions#create'
-  delete '/sessions/logout' => 'sessions#destroy'
-
-
   # Example resource route with options:
   #   resources :products do
   #     member do

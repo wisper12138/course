@@ -10,42 +10,45 @@
 
       <div class="panel panel-primary filterable">
         <div class="panel-heading">
-          <% if student_logged_in? %><h3 class="panel-title">评估课程</h3>
-          <% end %>
+          <h3 class="panel-title">课程评估结果</h3>
+         
         </div>
 
         <div class="panel-body">
-          <table class="table table-responsive table-condensed table-hover">
+
+          <div>
+          <%= form_tag(evaluations_path, method: "get") do%>
+          <%= text_field_tag(:selectcontent) %>
+          <%= submit_tag("搜索课程",class: 'btn btn-sm btn-primary',:style=>"font-size:13px;")%>
+          <% end %>
+          </div>
+
+          <table class="table table-responsive table-condensed table-hover" style="margin-top: 10px;">
             <thead>
-            <!--sgg30 style all-->
-            <tr style="font-size:16px;" >
+            <tr style="font-size:16px;">
               <th>课程编号</th>
               <th>课程名称</th>
               <th>课时/学分</th>
               <th>考试方式</th>
               <th>主讲教师</th>
               <th>操作</th>
+              <th>教师查看权限</th>
             </tr>
-            <!--sgg31 style all-->
+
             <tbody style="font-size:16px;">
-            <% @course.each do |course| %>
+            <% @courses.each do |course| %>
                 <tr>
-
-                  <!--#Has it been evaluated?-->
-                  <% evaluation1=Evaluation.where(:user_id=>current_user.id,:course_id=>course.id).first                   
-                     if evaluation1.nil? 
-                        label="评估"                                     
-                     else                                                  
-                        label="修改评估"                            
-                     end                                                       
-                  %>
-
                   <td><%= course.course_code %></td>
                   <td><%= course.name %></td>
                   <td><%= course.credit %></td>
                   <td><%= course.exam_type %></td>
-                  <!-- sgg1 delete &-->
-                  <td><%= course.teacher.name %></td>
+                  <!-- skk1 delete &-->
+                  <td><%=  if course.teacher.nil?
+                              
+                           else
+                              course.teacher.name 
+                           end%>            
+                  </td>
 
                   <% if teacher_logged_in? %>
                       <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>
@@ -56,14 +59,25 @@
                       <% end %>
                       <td><%= link_to "删除", course_path(course), :method => "delete", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %></td>
                   <% elsif student_logged_in? %>
-                      <td><%= link_to label, edit_evaluation_url(course), class: 'btn btn-xs btn-primary',
-                              :style=>"font-size:14px;"%></td>
+                      <td><%= link_to label, edit_evaluation_url(course), class: 'btn btn-xs btn-info' %></td>
                   <% end %>
+                  
+                  <td><%= link_to "查看", result_evaluation_url(course), class: 'btn btn-xs btn-primary',
+                          :style=>"font-size:13px;"%></td>
+                  <td><%= if course.isopen.nil? or course.isopen.empty? or course.isopen=="0"
+                            link_to "开通", openfeedback_evaluation_url(course), class: 'btn btn-xs btn-primary',
+                            :style=>"font-size:13px;"
+                          else
+                            link_to "关闭", closefeedback_evaluation_url(course), class: 'btn btn-xs btn-danger',
+                            :style=>"font-size:13px;"
+                          end
+                      %></td>
+
                 </tr>
             <% end %>
             </tbody>
           </table>
-
+          <%= will_paginate @courses %>
         </div>
       </div>
     </div>
